@@ -326,6 +326,11 @@ enum HTT_OPTION_TLV_TAGS {
     HTT_OPTION_TLV_TAG_SUPPORT_TX_MSDU_DESC_EXT = 0x4,
 };
 
+#undef  PREPACK
+#undef  POSTPACK
+#define PREPACK
+#define POSTPACK                __attribute__ ((packed))
+
 PREPACK struct htt_option_tlv_header_t {
     A_UINT8 tag;
     A_UINT8 length;
@@ -1096,6 +1101,11 @@ PREPACK struct htt_mgmt_tx_compl_ind {
 #define HTT_TX_HDR_SIZE_ETHERNET 14
 
 #define HTT_TX_HDR_SIZE_OUTER_HDR_MAX HTT_TX_HDR_SIZE_802_11_RAW
+
+#undef A_COMPILE_TIME_ASSERT
+#define A_COMPILE_TIME_ASSERT(assertion_name, predicate) \
+    typedef char assertion_name[(predicate) ? 1 : -1]
+
 A_COMPILE_TIME_ASSERT(
     htt_encap_hdr_size_max_check_nwifi,
     HTT_TX_HDR_SIZE_OUTER_HDR_MAX >= HTT_TX_HDR_SIZE_NATIVE_WIFI);
