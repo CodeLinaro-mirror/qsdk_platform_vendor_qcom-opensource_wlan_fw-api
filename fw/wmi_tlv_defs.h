@@ -1294,6 +1294,7 @@ typedef enum {
     WMITLV_TAG_STRUC_wmi_ipa_per_mac_stats,
     WMITLV_TAG_STRUC_wmi_pdev_featureset_cmd_fixed_param,
     WMITLV_TAG_STRUC_wmi_regulatory_fcc_rule_struct,
+    WMITLV_TAG_STRUC_wmi_vdev_param_enable_sr_prohibit_fixed_param,
 } WMITLV_TAG_ID;
 
 /*
@@ -1800,6 +1801,7 @@ typedef enum {
     OP(WMI_COEX_DBAM_CMDID) \
     OP(WMI_PDEV_FEATURESET_CMDID) \
     OP(WMI_ROAM_MLO_CONFIG_CMDID) \
+    OP(WMI_VDEV_PARAM_ENABLE_SR_PROHIBIT_CMDID) \
     /* add new CMD_LIST elements above this line */
 
 
@@ -5136,6 +5138,11 @@ WMITLV_CREATE_PARAM_STRUC(WMI_WOW_COAP_GET_BUF_INFO_CMDID);
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_coex_dbam_cmd_fixed_param, wmi_coex_dbam_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_COEX_DBAM_CMDID);
 
+/* VDEV SR prohibit cmd */
+#define WMITLV_TABLE_WMI_VDEV_PARAM_ENABLE_SR_PROHIBIT_CMDID(id,op,buf,len) \
+    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_vdev_param_enable_sr_prohibit_fixed_param, wmi_vdev_param_enable_sr_prohibit_fixed_param, fixed_param, WMITLV_SIZE_FIX)
+WMITLV_CREATE_PARAM_STRUC(WMI_VDEV_PARAM_ENABLE_SR_PROHIBIT_CMDID);
+
 
 
 /************************** TLV definitions of WMI events *******************************/
@@ -6273,7 +6280,8 @@ WMITLV_CREATE_PARAM_STRUC(WMI_11D_NEW_COUNTRY_EVENTID);
 /* Regulatory channel list of current country code */
 #define WMITLV_TABLE_WMI_REG_CHAN_LIST_CC_EVENTID(id,op,buf,len) \
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_reg_chan_list_cc_event_fixed_param, wmi_reg_chan_list_cc_event_fixed_param, fixed_param, WMITLV_SIZE_FIX) \
-    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_STRUC, wmi_regulatory_rule_struct, reg_rule_array, WMITLV_SIZE_VAR)
+    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_STRUC, wmi_regulatory_rule_struct, reg_rule_array, WMITLV_SIZE_VAR) \
+    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_STRUC, wmi_regulatory_fcc_rule_struct, reg_fcc_rule, WMITLV_SIZE_VAR)
 WMITLV_CREATE_PARAM_STRUC(WMI_REG_CHAN_LIST_CC_EVENTID);
 
 /* Ext regulatory channel list of current country code */
