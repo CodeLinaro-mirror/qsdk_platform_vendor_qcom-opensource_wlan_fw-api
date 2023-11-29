@@ -516,6 +516,11 @@ typedef enum {
     WMI_PDEV_SET_RF_PATH_CMDID,
     /** WSI stats info WMI command */
     WMI_PDEV_WSI_STATS_INFO_CMDID,
+    /*
+     * WMI cmd to Enable LED blink based on Tx+Rx Data Rate
+     * and download LED ON/OFF Rate table
+     */
+    WMI_PDEV_ENABLE_LED_BLINK_DOWNLOAD_TABLE_CMDID,
 
 
     /* VDEV (virtual device) specific commands */
@@ -4627,7 +4632,12 @@ typedef struct {
      *      Refer to the below definitions of the
      *      WMI_RSRC_CFG_HOST_SERVICE_FLAG_RADAR_FLAGS_FULL_BW_NOL_GET
      *      and _SET macros.
-     *  Bits 31:15 - Reserved
+     *  Bit 15
+     *      This bit will be set if the has qms_dlkm support enabled.
+     *      Refer to the below definitions of the
+     *      WMI_RSRC_CFG_HOST_SERVICE_FLAG_QMS_DLKM_SUPPORT_GET
+     *      and _SET macros.
+     *  Bits 31:16 - Reserved
      */
     A_UINT32 host_service_flags;
 
@@ -5074,6 +5084,11 @@ typedef struct {
     WMI_GET_BITS(host_service_flags, 14, 1)
 #define WMI_RSRC_CFG_HOST_SERVICE_FLAG_RADAR_FLAGS_FULL_BW_NOL_SET(host_service_flags, val) \
     WMI_SET_BITS(host_service_flags, 14, 1, val)
+
+#define WMI_RSRC_CFG_HOST_SERVICE_FLAG_QMS_DLKM_SUPPORT_GET(host_service_flags) \
+    WMI_GET_BITS(host_service_flags, 15, 1)
+#define WMI_RSRC_CFG_HOST_SERVICE_FLAG_QMS_DLKM_SUPPORT_SET(host_service_flags, val) \
+    WMI_SET_BITS(host_service_flags, 15, 1, val)
 
 
 #define WMI_RSRC_CFG_CARRIER_CFG_CHARTER_ENABLE_GET(carrier_config) \
@@ -31289,7 +31304,15 @@ typedef enum {
     TSF_TSTAMP_QTIMER_CAPTURE_REQ = 4,
     TSF_TSTAMP_AUTO_REPORT_ENABLE = 5,
     TSF_TSTAMP_AUTO_REPORT_DISABLE = 6,
+    TSF_TSTAMP_PERIODIC_REPORT_REQ = 5,
 } wmi_tsf_tstamp_action;
+
+typedef enum {
+    TSF_TSTAMP_REPORT_TTIMER = 0x1, /* bit 0: TSF Timer */
+    TSF_TSTAMP_REPORT_QTIMER = 0x2, /* bit 1: H/T common Timer */
+} wmi_tsf_tstamp_report_flags;
+
+#define TSF_TSTAMP_REPORT_PERIOD_MIN   1000    /* ms units */
 
 typedef struct {
     /** TLV tag and len; tag equals
@@ -31299,6 +31322,12 @@ typedef struct {
     A_UINT32 vdev_id;
     /* action type, refer to wmi_tsf_tstamp_action */
     A_UINT32 tsf_action;
+    /*
+     * The below fields are valid only when tsf_action is
+     * TSF_TSTAMP_PERIODIC_REPORT_REQ.
+     */
+    A_UINT32 period; /* the period of report timestamp, ms units */
+    A_UINT32 flags;  /* wmi_tsf_tstamp_report_flags */
 } wmi_vdev_tsf_tstamp_action_cmd_fixed_param;
 
 typedef struct {
@@ -37079,6 +37108,7 @@ static INLINE A_UINT8 *wmi_id_to_name(A_UINT32 wmi_command)
         WMI_RETURN_STRING(WMI_AUDIO_TRANSPORT_SWITCH_RESP_STATUS_CMDID);
         WMI_RETURN_STRING(WMI_PEER_MULTIPLE_REORDER_QUEUE_SETUP_CMDID);
         WMI_RETURN_STRING(WMI_COEX_MULTIPLE_CONFIG_CMDID);
+        WMI_RETURN_STRING(WMI_PDEV_ENABLE_LED_BLINK_DOWNLOAD_TABLE_CMDID);
     }
 
     return (A_UINT8 *) "Invalid WMI cmd";
@@ -40345,6 +40375,14 @@ typedef struct {
     A_UINT32 scoring_capability_bitmap;
 } wmi_roam_capability_report_event_fixed_param;
 
+/*
+ * Definition of disallow connection modes.
+ */
+typedef enum {
+    /* Bit 0: roam to 5GL+5GH MLSR is not allowed if the bit is set. */
+    WMI_ROAM_MLO_CONNECTION_MODE_5GL_5GH_MLSR = 0x1,
+} WMI_ROAM_MLO_CONNECTION_MODES;
+
 typedef struct {
     A_UINT32 tlv_header; /** TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_roam_mlo_config_cmd_fixed_param */
     wmi_mac_addr partner_link_addr; /* Assigned link address which can be used as self link addr when vdev is not created */
@@ -40364,6 +40402,13 @@ typedef struct {
      */
     A_UINT32 support_link_band; /* Configure the band bitmap of mlo connection supports. */
     A_UINT32 max_active_links; /* Max active links supported for STA */
+
+    /*
+     * Disallow the specified connection mode(s) when roaming to MLD AP.
+     * Refer to the WMI_ROAM_MLO_CONNECTION_MODES enum for the connection mode
+     * each bit represents.
+     */
+    A_UINT32 disallow_connect_modes;
 } wmi_roam_mlo_config_cmd_fixed_param;
 
 typedef struct {
@@ -43853,6 +43898,7 @@ enum wmi_oem_data_evt_cause {
     WMI_OEM_DATA_EVT_CAUSE_UNSPECIFIED = 0,
     WMI_OEM_DATA_EVT_CAUSE_CMD_REQ = 1,
     WMI_OEM_DATA_EVT_CAUSE_ASYNC = 2,
+    WMI_OEM_DATA_EVT_CAUSE_QMS = 3,
 };
 
 typedef struct {
@@ -47213,6 +47259,39 @@ typedef struct {
     A_UINT32 tlv_header;
     A_UINT32 pdev_id;
 } wmi_pdev_utf_event_fixed_param;
+
+typedef struct {
+    /** TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_led_blink_rate_table */
+    A_UINT32 tlv_header;
+
+    A_UINT32 on_time;  /* units = milliseconds */
+    A_UINT32 off_time; /* units = milliseconds */
+} wmi_led_blink_rate_table;
+
+typedef struct {
+    /** TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_enable_led_blink_download_rate_table_fixed_param */
+    A_UINT32 tlv_header;
+    /* Pdev Id 0 or 1 based on split phy */
+    A_UINT32 pdev_id;
+    /* Feature enable or disable flag 0-disable 1-enable  */
+    A_UINT32 blink_enable_flag;
+    /* Bandwidth (Mbps) of each index in the blink rate table.
+     * This quantum specification tells the FW which of the blink rate table
+     * elements to use; the FW will divide the data rate by this bw_per_index
+     * and round down, to obtain the index into the rate table for the blink
+     * rate corresponding to the data rate.
+     */
+    A_UINT32 bw_per_index;
+
+    /**
+     * Following this fixed_param TLV are the following additional TLVs:
+     *   - wmi_led_blink_rate_table led_blink_rate_table[]
+     *     The led_blink_rate_table[] elements need to be ordered by
+     *     increasing data rate, so that by dividing the data rate by
+     *     bw_per_index, the FW can find which index/element of the
+     *     led_blink_rate_table[] array to use.
+     */
+} wmi_enable_led_blink_download_rate_table_fixed_param;
 
 typedef enum {
     /* Used when peer attempts connection with vdev */
