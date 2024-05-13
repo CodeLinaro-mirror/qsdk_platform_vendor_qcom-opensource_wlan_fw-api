@@ -5129,6 +5129,10 @@ typedef struct {
     A_UINT32 trigger_type_11be[HTT_TX_PDEV_STATS_NUM_11BE_TRIGGER_TYPES];
     /** Stats for Extra EHT LTF */
     A_UINT32 extra_eht_ltf;
+    /** Counter for Extra EHT LTFs in OFDMA sequences */
+    A_UINT32 extra_eht_ltf_ofdma;
+    /** 11AX HE UL_BA RU Size stats */
+    A_UINT32 ofdma_ba_ru_size[HTT_TX_PDEV_STATS_NUM_AX_RU_SIZE_COUNTERS];
 } htt_tx_pdev_rate_stats_tlv;
 
 typedef struct {
@@ -5205,12 +5209,16 @@ typedef struct {
     A_UINT32 be_ofdma_tx_nss[HTT_TX_PDEV_STATS_NUM_SPATIAL_STREAMS];
     /** 11BE EHT DL MU OFDMA TX BW stats */
     A_UINT32 be_ofdma_tx_bw[HTT_TX_PDEV_STATS_NUM_BE_BW_COUNTERS];
+    /** 11BE EHT DL MU OFDMA TX BW stats at reduced channel config */
+    A_UINT32 reduced_be_ofdma_tx_bw[HTT_TX_PDEV_STATS_NUM_REDUCED_CHAN_TYPES][HTT_TX_PDEV_STATS_NUM_BW_COUNTERS];
     /** 11BE EHT DL MU OFDMA TX guard interval stats */
     A_UINT32 be_ofdma_tx_gi[HTT_TX_PDEV_STATS_NUM_GI_COUNTERS][HTT_TX_PDEV_STATS_NUM_BE_MCS_COUNTERS];
     /** 11BE EHT DL MU OFDMA TX RU Size stats */
     A_UINT32 be_ofdma_tx_ru_size[HTT_TX_PDEV_STATS_NUM_BE_RU_SIZE_COUNTERS];
     /** 11BE EHT DL MU OFDMA EHT-SIG MCS stats */
     A_UINT32 be_ofdma_eht_sig_mcs[HTT_TX_PDEV_STATS_NUM_EHT_SIG_MCS_COUNTERS];
+    /** 11BE EHT UL_BA expected RU size stats */
+    A_UINT32 be_ofdma_ba_ru_size[HTT_TX_PDEV_STATS_NUM_BE_RU_SIZE_COUNTERS];
 } htt_tx_pdev_rate_stats_be_ofdma_tlv;
 
 typedef struct {
@@ -5648,6 +5656,7 @@ typedef struct {
     A_UINT32 be_ul_ofdma_rx_gi[HTT_RX_PDEV_STATS_NUM_GI_COUNTERS][HTT_RX_PDEV_STATS_NUM_BE_MCS_COUNTERS];
     A_UINT32 be_ul_ofdma_rx_nss[HTT_RX_PDEV_STATS_NUM_SPATIAL_STREAMS];
     A_UINT32 be_ul_ofdma_rx_bw[HTT_RX_PDEV_STATS_NUM_BE_BW_COUNTERS];
+    A_UINT32 reduced_be_ul_ofdma_rx_bw[HTT_RX_PDEV_STATS_NUM_REDUCED_CHAN_TYPES][HTT_RX_PDEV_STATS_NUM_BW_COUNTERS];
     A_UINT32 be_ul_ofdma_rx_stbc;
     A_UINT32 be_ul_ofdma_rx_ldpc;
 
