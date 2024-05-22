@@ -9314,6 +9314,93 @@ typedef enum {
 
     /** Parameter used for enabling/disabling RFA toggle for SAP mode */
     WMI_PDEV_PARAM_SET_SAP_RFA_TOGGLE,
+
+    /** Parameter to set PDEV level UL OFDMA RTD */
+    WMI_PDEV_PARAM_UL_OFDMA_RTD,
+
+    /** Parameter to enable/disable tid0 and tid3 mapping to work 3 Link MLO */
+    WMI_PDEV_PARAM_TID_MAPPING_3LINK_MLO,
+
+    /** Parameter to enable/disable small OFDMA M-RUs **/
+    WMI_PDEV_PARAM_ENABLE_SMALL_MRU,
+
+    /** Parameter to enable/disable large OFDMA M-RUs **/
+    WMI_PDEV_PARAM_ENABLE_LARGE_MRU,
+
+    /** Parameter to enable/disable delayed LMR feedback.
+     * Note: Delayed LMR feedback is supported only up to two ranging peers to
+     * enable Location certification
+     * 0 - Immediate LMR feedback is enabled for all ranging peers.
+     * 1 (non zero) - delayed LMR feedback is enabled. Third peer onward will
+     *     default to immediate LMR feedback.
+     **/
+    WMI_PDEV_PARAM_ENABLE_DELAYED_LMR_FEEDBACK,
+
+    /* DFS_RADAR_MASK: Radar mask setting programmed in HW registers.
+     *     bit   | config_mode
+     * -----------------------
+     *   0  - 15 | Each bit represents a 20 MHz portion of the channel.
+     *           | 0-Unmasked 1-Masked
+     *   16 - 31 | Reserved.
+     * Bit 0 represents the highest 20 MHz portion within the channel.
+     * For example...
+     * For a 80 MHz channel, bit0 = highest 20 MHz, bit3 = lowest 20 MHz
+     * For a 320 MHz channel, bit0 = highest 20 MHz, bit15 = lowest 20 MHz
+     */
+    WMI_PDEV_PARAM_DFS_RADAR_MASK,
+
+    /** PWR_REDUCTION_IN_QUARTER_DB:
+     * Reduce final Tx power (derived after all considerations)
+     * by specified value in units of 0.25 dB.
+     * E.g. a value of 4 will result in a 1.0 dB tx power reduction.
+     */
+    WMI_PDEV_PARAM_PWR_REDUCTION_IN_QUARTER_DB,
+     /**
+     * Parameter used to set the TX to Rx switch over time
+     * HALPHY will configure this value into Vreg
+     */
+    WMI_PDEV_PARAM_TX_RX_SWITCH_OVER,
+
+    /**
+     * Parameter used to set the preamble power
+     * HALPHY will configure this value into Vreg
+     */
+    WMI_PDEV_PARAM_PREAMBLE_PWR,
+
+    /**
+     * Parameter used to set the stomper threshold
+     * HALPHY will configure this value into Vreg
+     */
+    WMI_PDEV_PARAM_STOMPER_THRSHOLD,
+
+    /**
+     * Parameter used to set the AGC Max Gain value
+     * HALPHY will configure this value into Vreg
+     */
+    WMI_PDEV_PARAM_AGC_GAIN_VALUE,
+
+    /**
+     * Parameter used to configure the lsig_rlsig_power_scaling
+     * PSD Boost value
+     */
+    WMI_PDEV_PARAM_LSIG_RLSIG_POWER_SCALING,
+
+    /**
+     * Parameter used to configure the he_siga_power_scaling
+     * PSD Boost value
+     */
+
+    WMI_PDEV_PARAM_HESIGA_POWER_SCALING,
+
+    /**
+     * Parameter used to enable/disable removal of preamble for trigerred frames
+     * and 11AX concurrent ACK
+     */
+    WMI_PDEV_PARAM_PREAMBLE_POWER_REMOVAL,
+
+    /* Parameter used to enable/disable pre_11ax_packet_removal */
+    WMI_PDEV_PARAM_PRE_11AX_PACKET_REMOVAL,
+
 } WMI_PDEV_PARAM;
 
 #define WMI_PDEV_ONLY_BSR_TRIG_IS_ENABLED(trig_type) WMI_GET_BITS(trig_type, 0, 1)
@@ -18173,6 +18260,23 @@ typedef enum {
      * if corresponding INI is set
      */
     WMI_VDEV_PARAM_DISABLE_2G_TWT,                        /* 0xBF */
+    /*
+     * Disable FW initiated Information frame for TWT
+     */
+    WMI_VDEV_PARAM_DISABLE_TWT_INFO_FRAME,                /* 0xC0 */
+
+    /*
+     * Set the Recommended Max allowed active links
+     */
+    WMI_VDEV_PARAM_MLO_MAX_RECOM_ACTIVE_LINKS,            /* 0xC1 */
+
+    /* DCS stats enable configuration at VDEV level */
+    WMI_VDEV_PARAM_DCS,                                   /* 0xC2 */
+
+    /* VDEV parameter to configure Telescopic DTIM count */
+    WMI_VDEV_PARAM_TELESDTIM_CNT,                         /* 0xC3 */
+
+    WMI_VDEV_PARAM_PURE_11AX_MODE,                       /* 0xC4 */
 
 
     /*=== ADD NEW VDEV PARAM TYPES ABOVE THIS LINE ===
