@@ -26921,10 +26921,11 @@ typedef struct {
     A_UINT32 tid_num;
 
     /** msduq_mask to set the value
-     * bit 0 - HI-PRI msdu flowq qdepth threshold need to update if set
-     * bit 1 - LOW-PRI msdu flowq qdepth threshold need to update if set
-     * bit 2 - UDP msdu flowq qdepth threshold need to update if set
+     * bit 0 - HOL msdu flowq qdepth threshold need to update if set
+     * bit 1 - LATENCY_CRIT_0 msdu flowq qdepth threshold need to update if set
+     * bit 2 - LATENCY_CRIT_1 msdu flowq qdepth threshold need to update if set
      * bit 3 - NON-UDP msdu flowq qdepth threshold need to update if set
+     * bit 4 - UDP msdu flowq qdepth threshold need to update if set
      * rest of bits are reserved and set to 0.
      */
     A_UINT32 msduq_update_mask;
