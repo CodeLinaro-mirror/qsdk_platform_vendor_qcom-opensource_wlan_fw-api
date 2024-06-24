@@ -516,6 +516,18 @@ typedef enum {
     WMI_PDEV_SET_RF_PATH_CMDID,
     /** WSI stats info WMI command */
     WMI_PDEV_WSI_STATS_INFO_CMDID,
+    /*
+     ** WMI cmd to Enable LED blink based on Tx+Rx Data Rate
+     ** and download LED ON/OFF Rate table
+     **/
+    WMI_PDEV_ENABLE_LED_BLINK_DOWNLOAD_TABLE_CMDID,
+    /** WMI Command to enable wifi radar */
+    WMI_PDEV_ENABLE_WIFI_RADAR_CMDID,
+    /* WMI Command to enable xLNA */
+    WMI_PDEV_ENABLE_XLNA_CMDID,
+    /** Command to Get VREG Error values used for ANI */
+    WMI_PDEV_GET_ANI_ERR_CMDID,
+
     /* Set ACK/CTS response rate. */
     WMI_PDEV_SET_ACK_CTS_RESP_RATE_CMDID,
 
@@ -1760,6 +1772,14 @@ typedef enum {
 
     /* Event to get AOA phasedelta values for all gain tables from HALPHY */
     WMI_PDEV_ENHANCED_AOA_PHASEDELTA_EVENTID,
+
+    WMI_PDEV_WIFI_RADAR_CAL_COMPLETION_STATUS_EVENTID,
+
+    /* Event to indicate xLNA is enabled */
+    WMI_PDEV_ENABLE_XLNA_EVENTID,
+
+    /* Event to Get VREG Error values used for ANI */
+    WMI_PDEV_GET_ANI_ERR_EVENTID,
 
     /* VDEV specific events */
     /** VDEV started event in response to VDEV_START request */
@@ -37022,6 +37042,7 @@ static INLINE A_UINT8 *wmi_id_to_name(A_UINT32 wmi_command)
         WMI_RETURN_STRING(WMI_PDEV_WSI_STATS_INFO_CMDID);
         WMI_RETURN_STRING(WMI_CSA_EVENT_STATUS_INDICATION_CMDID);
         WMI_RETURN_STRING(WMI_PDEV_SET_ACK_CTS_RESP_RATE_CMDID);
+        WMI_RETURN_STRING(WMI_PDEV_GET_ANI_ERR_CMDID);
     }
 
     return (A_UINT8 *) "Invalid WMI cmd";
@@ -41035,6 +41056,60 @@ typedef struct {
      */
     A_UINT32 status;
 } wmi_pdev_set_halphy_cal_bmap_evt_fixed_param;
+
+typedef struct {
+    A_UINT32 tlv_header;    /* TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_pdev_get_ani_err_cmd_fixed_param */
+    A_UINT32 pdev_id;       /* PDEV ID set by the command */
+} wmi_pdev_get_ani_err_cmd_fixed_param;
+
+typedef struct {
+    A_UINT32 tlv_header;    /* TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_pdev_get_ani_err_evt_fixed_param */
+    A_UINT32 pdev_id;       /* PDEV Id set by the command */
+
+    /* number of RXTD OFDMA OTA error counts except power surge and drop */
+    A_UINT32 rx_ofdma_phy_err_cnt;
+
+    /* rx_cck_fail_cnt:
+     * number of cck error counts due to rx reception failure because of
+     * timing error in cck
+     */
+    A_UINT32 rx_cck_phy_err_cnt;
+    A_UINT32 rx_cck1_phy_err_cnt;
+    A_UINT32 rx_cck2_phy_err_cnt;
+    A_UINT32 rx_cck7_phy_err_cnt;
+
+    /* lsig_phy_err_cnt
+     * LSIG Error count per source;
+     */
+    A_UINT32 lsig_phy_err_cnt;
+
+    /* scaled_err:
+     * This error takes into account all the above errors (ofdm_timing_err, cck_err, lsig_phy_err),
+     * adds weightage to it and decides whether desense is necessary or not
+     */
+    A_UINT32 scaled_err;
+
+    /* sizing:
+     * This is to account the sizing events occured in phy
+     */
+    A_UINT32 sizing;
+    /* phy_err_rate:
+     * This error takes into account the scaled error to listen time
+     */
+    A_UINT32 phy_err_rate;
+
+    /* Timestamp value when VREG error values are dumped
+     */
+    A_UINT32 timestamp_vreg;
+
+    /* Status WMI_RETURN_STRING(WMI_PDEV_GET_ANI_ERR_CMDID);
+
+     * 0 - Success
+     * 1 - Listen Time is small (Error)
+     * 2 - VREG values overflowed (Error)
+     */
+    A_UINT32 status;
+} wmi_pdev_get_ani_err_evt_fixed_param;
 
 /* below structures are related to Motion Detection. */
 typedef struct {

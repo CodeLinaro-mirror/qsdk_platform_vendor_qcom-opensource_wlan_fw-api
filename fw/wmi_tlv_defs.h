@@ -1403,6 +1403,36 @@ typedef enum {
     WMITLV_TAG_STRUC_wmi_csa_event_status_ind_fixed_param,
     WMITLV_TAG_STRUC_wmi_mlo_link_state_switch_req_evt_fixed_param,
     WMITLV_TAG_STRUC_wmi_mlo_link_state_switch_trigger_reason_tlv_param,
+    WMITLV_TAG_STRUC_wmi_vdev_sched_mode_probe_req_fixed_param,
+    WMITLV_TAG_STRUC_wmi_vdev_sched_mode_probe_resp_fixed_param,
+    WMITLV_TAG_STRUC_wmi_vdev_stop_mlo_params,
+    WMITLV_TAG_STRUC_wmi_vdev_ch_power_psd_info,
+    WMITLV_TAG_STRUC_wmi_vdev_ch_power_eirp_info,
+    WMITLV_TAG_STRUC_wmi_pdev_utf_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_pdev_utf_event_fixed_param,
+    WMITLV_TAG_STRUC_wmi_vdev_oob_connection_req_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_vdev_oob_connection_resp_event_fixed_param,
+    WMITLV_TAG_STRUC_wmi_audio_transport_switch_resp_status_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_audio_transport_switch_type_event_fixed_param,
+    WMITLV_TAG_STRUC_wmi_dbw_chan_info,
+    WMITLV_TAG_STRUC_wmi_peer_multiple_reorder_queue_setup_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_peer_per_reorder_q_setup_params_t,
+    WMITLV_TAG_STRUC_wmi_coex_multiple_config_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_disallowed_mlo_mode_bitmap_param,
+    WMITLV_TAG_STRUC_wmi_led_blink_rate_table,
+    WMITLV_TAG_STRUC_wmi_enable_led_blink_download_rate_table_fixed_param,
+    WMITLV_TAG_STRUC_wmi_vdev_get_twt_session_stats_info_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_pdev_enable_wifi_radar_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_dma_buf_release_wifi_radar_meta_data,
+    WMITLV_TAG_STRUC_wmi_mlo_link_info,
+    WMITLV_TAG_STRUC_wmi_dcs_obss_int_t,
+    WMITLV_TAG_STRUC_wmi_pdev_wifi_radar_cal_completion_status_event_param,
+    WMITLV_TAG_STRUC_wmi_sar_flags,
+    WMITLV_TAG_STRUC_wmi_pdev_enable_xlna_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_pdev_enable_xlna_event_fixed_param,
+    WMITLV_TAG_STRUC_wmi_reg_chan_list_cc_event_ext2_fixed_param,
+    WMITLV_TAG_STRUC_wmi_pdev_get_ani_err_cmd_fixed_param,
+    WMITLV_TAG_STRUC_wmi_pdev_get_ani_err_evt_fixed_param,
     WMITLV_TAG_STRUC_wmi_pdev_set_ack_cts_resp_rate_cmd_fixed_param,
 } WMITLV_TAG_ID;
 /*
@@ -1941,6 +1971,7 @@ typedef enum {
     OP(WMI_PDEV_WSI_STATS_INFO_CMDID) \
     OP(WMI_CSA_EVENT_STATUS_INDICATION_CMDID) \
     OP(WMI_PDEV_SET_ACK_CTS_RESP_RATE_CMDID) \
+    OP(WMI_PDEV_GET_ANI_ERR_CMDID) \
     /* add new CMD_LIST elements above this line */
 
 
@@ -2258,6 +2289,7 @@ typedef enum {
     OP(WMI_NAN_OEM_DATA_EVENTID) \
     OP(WMI_PDEV_ENHANCED_AOA_PHASEDELTA_EVENTID) \
     OP(WMI_MLO_LINK_STATE_SWITCH_EVENTID) \
+    OP(WMI_PDEV_GET_ANI_ERR_EVENTID) \
     /* add new EVT_LIST elements above this line */
 
 
@@ -5484,6 +5516,11 @@ WMITLV_CREATE_PARAM_STRUC(WMI_CSA_EVENT_STATUS_INDICATION_CMDID);
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_pdev_set_ack_cts_resp_rate_cmd_fixed_param, wmi_pdev_set_ack_cts_resp_rate_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
 WMITLV_CREATE_PARAM_STRUC(WMI_PDEV_SET_ACK_CTS_RESP_RATE_CMDID);
 
+/* Get ANI VREG ERR command */
+#define WMITLV_TABLE_WMI_PDEV_GET_ANI_ERR_CMDID(id,op,buf,len) \
+    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_pdev_get_ani_err_cmd_fixed_param, wmi_pdev_get_ani_err_cmd_fixed_param, fixed_param, WMITLV_SIZE_FIX)
+WMITLV_CREATE_PARAM_STRUC(WMI_PDEV_GET_ANI_ERR_CMDID);
+
 
 /************************** TLV definitions of WMI events *******************************/
 
@@ -7486,6 +7523,10 @@ WMITLV_CREATE_PARAM_STRUC(WMI_PDEV_ENHANCED_AOA_PHASEDELTA_EVENTID);
     WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_ARRAY_STRUC, wmi_mlo_link_state_switch_trigger_reason, switch_trigger_reason, WMITLV_SIZE_VAR)
 WMITLV_CREATE_PARAM_STRUC(WMI_MLO_LINK_STATE_SWITCH_EVENTID);
 
+/* Get ANI VREG ERR Event */
+#define WMITLV_TABLE_WMI_PDEV_GET_ANI_ERR_EVENTID(id,op,buf,len)  \
+    WMITLV_ELEM(id,op,buf,len, WMITLV_TAG_STRUC_wmi_pdev_get_ani_err_evt_fixed_param, wmi_pdev_get_ani_err_evt_fixed_param, fixed_param, WMITLV_SIZE_FIX)
+WMITLV_CREATE_PARAM_STRUC(WMI_PDEV_GET_ANI_ERR_EVENTID);
 
 #ifdef __cplusplus
 }
