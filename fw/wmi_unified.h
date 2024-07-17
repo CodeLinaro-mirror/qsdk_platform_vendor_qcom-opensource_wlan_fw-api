@@ -18300,6 +18300,10 @@ typedef enum {
 
     WMI_VDEV_PARAM_PURE_11AX_MODE,                       /* 0xC4 */
 
+     /** Enable or disable Dual carrier modulation
+     * valid values: 0-Disable DCM, 1-Enable DCM for ULOFDMA.
+     */
+    WMI_VDEV_PARAM_HE_ULOFDMA_DCM,                       /* 0xC5 */
 
     /*=== ADD NEW VDEV PARAM TYPES ABOVE THIS LINE ===
      * The below vdev param types are used for prototyping, and are
