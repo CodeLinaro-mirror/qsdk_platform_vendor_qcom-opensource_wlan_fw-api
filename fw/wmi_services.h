@@ -657,6 +657,8 @@ typedef  enum  {
     WMI_SERVICE_QMS_DLKM_SUPPORT = 404, /* DEPRECATED */
     WMI_SERVICE_HALPHY_ANI_ERROR_SUPPORT = 405, /* Indicates ANI VREG Errors support by FW */
     WMI_SERVICE_VDEV_PURE11AX_SUPPORT = 406, /* Indicates Pure11ax mode supported by FW */
+    WMI_SERVICE_PDEV_UL_OFDMA_RTD_SUPPORT = 407, /* Indicates UL-OFDMA RTD configuration supported by FW */
+    WMI_SERVICE_PEER_UL_RTD_ESTIMATE = 408, /* Indicates UL RTD window start config supported by FW */
 
     WMI_MAX_EXT2_SERVICE
 
