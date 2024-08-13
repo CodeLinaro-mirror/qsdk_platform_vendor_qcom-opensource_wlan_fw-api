@@ -9421,6 +9421,8 @@ typedef enum {
     /* Parameter used to enable/disable pre_11ax_packet_removal */
     WMI_PDEV_PARAM_PRE_11AX_PACKET_REMOVAL,
 
+    WMI_PDEV_PARAM_IOT_MESH_STATUS,
+
 } WMI_PDEV_PARAM;
 
 #define WMI_PDEV_ONLY_BSR_TRIG_IS_ENABLED(trig_type) WMI_GET_BITS(trig_type, 0, 1)
