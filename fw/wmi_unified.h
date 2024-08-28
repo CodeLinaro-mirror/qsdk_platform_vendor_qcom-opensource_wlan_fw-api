@@ -528,6 +528,13 @@ typedef enum {
     /** Command to Get VREG Error values used for ANI */
     WMI_PDEV_GET_ANI_ERR_CMDID,
 
+    /*WMI cmd to start ulrtd measurement */
+    WMI_PDEV_START_MEASURE_UL_RTD_CMDID,
+    /** request the estimated timing error for the peer. FW shall respond with
+     **  WMI_PDEV_GET_MEASURED_UL_RTD_EVENTID.
+     **  WMI cmd used getting RTD Timing error */
+    WMI_PDEV_GET_MEASURED_UL_RTD_CMDID,
+
     /* Set ACK/CTS response rate. */
     WMI_PDEV_SET_ACK_CTS_RESP_RATE_CMDID,
 
@@ -1780,6 +1787,11 @@ typedef enum {
 
     /* Event to Get VREG Error values used for ANI */
     WMI_PDEV_GET_ANI_ERR_EVENTID,
+
+    /* Return the estimate timing error for the Peer specified in the
+     ** WMI_PDEV_GET_MEASURED_UL_RTD_CMDID command.
+     **/
+     WMI_PDEV_GET_MEASURED_UL_RTD_EVENTID,
 
     /* VDEV specific events */
     /** VDEV started event in response to VDEV_START request */
@@ -37048,6 +37060,8 @@ static INLINE A_UINT8 *wmi_id_to_name(A_UINT32 wmi_command)
         WMI_RETURN_STRING(WMI_CSA_EVENT_STATUS_INDICATION_CMDID);
         WMI_RETURN_STRING(WMI_PDEV_SET_ACK_CTS_RESP_RATE_CMDID);
         WMI_RETURN_STRING(WMI_PDEV_GET_ANI_ERR_CMDID);
+        WMI_RETURN_STRING(WMI_PDEV_START_MEASURE_UL_RTD_CMDID);
+        WMI_RETURN_STRING(WMI_PDEV_GET_MEASURED_UL_RTD_CMDID);
     }
 
     return (A_UINT8 *) "Invalid WMI cmd";
@@ -41115,6 +41129,33 @@ typedef struct {
      */
     A_UINT32 status;
 } wmi_pdev_get_ani_err_evt_fixed_param;
+
+typedef struct {
+    A_UINT32 tlv_header;    /* TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_pdev_start_measure_ul_rtd_cmd_fixed_param */
+    /** MAC address of the peer for which the estimated timing err is required. */
+    /* Set pdev id */
+    A_UINT32 pdev_id;
+    wmi_mac_addr peer_macaddr;
+    A_UINT8 start_win; /* start window for specified peer mac <0/1>*/
+} wmi_pdev_start_measure_ul_rtd_cmd_fixed_param;
+
+typedef struct {
+    A_UINT32 tlv_header;    /* TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_pdev_get_measured_ul_rtd_cmd_fixed_param */
+    /* Set pdev id */
+    A_UINT32 pdev_id;
+} wmi_pdev_get_measured_ul_rtd_cmd_fixed_param;
+
+typedef struct {
+    A_UINT32 tlv_header;    /* TLV tag and len; tag equals WMITLV_TAG_STRUC_wmi_pdev_get_measured_ul_rtd_event_fixed_param */
+    /* PDEV id */
+    A_UINT32 pdev_id;
+    /** MAC address of the peer for which the estimated timing err is shared. */
+    wmi_mac_addr peer_macaddr;
+    /* Estimated timing err in use
+     * When ul_rtd_timing_err is not valid, the value is set to WMI_PDEV_ESTIMATED_UL_RTD_INVALID.
+     */
+    A_UINT32 ul_rtd_timing_err; /* Get UL RTD Timing Error */
+} wmi_pdev_get_measured_ul_rtd_event_fixed_param;
 
 /* below structures are related to Motion Detection. */
 typedef struct {
