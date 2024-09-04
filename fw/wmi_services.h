@@ -659,6 +659,7 @@ typedef  enum  {
     WMI_SERVICE_VDEV_PURE11AX_SUPPORT = 406, /* Indicates Pure11ax mode supported by FW */
     WMI_SERVICE_PDEV_UL_OFDMA_RTD_SUPPORT = 407, /* Indicates UL-OFDMA RTD configuration supported by FW */
     WMI_SERVICE_PEER_UL_RTD_ESTIMATE = 408, /* Indicates UL RTD window start config supported by FW */
+    WMI_SERVICE_DCM_ULOFDMA_SUPPORT = 409, /* Support for DCM for ULOFDMA Transmission */
 
     WMI_MAX_EXT2_SERVICE
 
