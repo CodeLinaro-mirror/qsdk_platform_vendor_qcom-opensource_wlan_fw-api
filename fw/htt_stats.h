@@ -363,7 +363,7 @@ enum htt_dbg_ext_stats_type {
      */
     HTT_DBG_EXT_STATS_FSE_RX = 28,
 
-    /** HTT_DBG_EXT_PEER_CTRL_PATH_TXRX_STATS
+    /** HTT_DBG_EXT_STATS_PEER_CTRL_PATH_TXRX
      * PARAMS:
      *   - config_param0: [Bit0] : [1] for mac_addr based request
      *   - config_param1: [Bit31 : Bit0] mac_addr31to0
@@ -371,7 +371,10 @@ enum htt_dbg_ext_stats_type {
      * RESP MSG:
      *   - htt_ctrl_path_txrx_stats_t
      */
-    HTT_DBG_EXT_PEER_CTRL_PATH_TXRX_STATS = 29,
+    HTT_DBG_EXT_STATS_PEER_CTRL_PATH_TXRX = 29,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PEER_CTRL_PATH_TXRX_STATS =
+            HTT_DBG_EXT_STATS_PEER_CTRL_PATH_TXRX,
 
     /** HTT_DBG_EXT_STATS_PDEV_RX_RATE_EXT
      * PARAMS:
@@ -393,15 +396,18 @@ enum htt_dbg_ext_stats_type {
      */
     HTT_DBG_EXT_STATS_TXBF_OFDMA          = 32,
 
-    /** HTT_DBG_EXT_STA_11AX_UL_STATS
+    /** HTT_DBG_EXT_STATS_STA_11AX_UL
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_sta_11ax_ul_stats
      */
-    HTT_DBG_EXT_STA_11AX_UL_STATS = 33,
+    HTT_DBG_EXT_STATS_STA_11AX_UL = 33,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_STA_11AX_UL_STATS =
+            HTT_DBG_EXT_STATS_STA_11AX_UL,
 
-    /** HTT_DBG_EXT_VDEV_RTT_RESP_STATS
+    /** HTT_DBG_EXT_STATS_VDEV_RTT_RESP
      * PARAMS:
      *   - config_param0:
      *      [Bit7 : Bit0]   vdev_id:8
@@ -409,61 +415,89 @@ enum htt_dbg_ext_stats_type {
      * RESP MSG:
      *   -
      */
-    HTT_DBG_EXT_VDEV_RTT_RESP_STATS = 34,
+    HTT_DBG_EXT_STATS_VDEV_RTT_RESP = 34,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_VDEV_RTT_RESP_STATS =
+            HTT_DBG_EXT_STATS_VDEV_RTT_RESP,
 
-    /** HTT_DBG_EXT_PKTLOG_AND_HTT_RING_STATS
+    /** HTT_DBG_EXT_STATS_PKTLOG_AND_HTT_RING
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_pktlog_and_htt_ring_stats_t
      */
-    HTT_DBG_EXT_PKTLOG_AND_HTT_RING_STATS = 35,
+    HTT_DBG_EXT_STATS_PKTLOG_AND_HTT_RING = 35,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PKTLOG_AND_HTT_RING_STATS =
+            HTT_DBG_EXT_STATS_PKTLOG_AND_HTT_RING,
 
-    /** HTT_DBG_EXT_STATS_DLPAGER_STATS
+    /** HTT_DBG_EXT_STATS_DLPAGER
      * PARAMS:
      *
      * RESP MSG:
      *   - htt_dlpager_stats_t
      */
-    HTT_DBG_EXT_STATS_DLPAGER_STATS = 36,
+    HTT_DBG_EXT_STATS_DLPAGER = 36,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_STATS_DLPAGER_STATS =
+            HTT_DBG_EXT_STATS_DLPAGER,
 
-    /** HTT_DBG_EXT_PHY_COUNTERS_AND_PHY_STATS
+    /** HTT_DBG_EXT_STATS_PHY
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_phy_counters_and_phy_stats_t
      */
-    HTT_DBG_EXT_PHY_COUNTERS_AND_PHY_STATS = 37,
+    HTT_DBG_EXT_STATS_PHY = 37,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PHY_COUNTERS_AND_PHY_STATS =
+            HTT_DBG_EXT_STATS_PHY,
 
-    /** HTT_DBG_EXT_VDEVS_TXRX_STATS
+    /** HTT_DBG_EXT_STATS_VDEVS_TXRX
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_vdevs_txrx_stats_t
      */
-    HTT_DBG_EXT_VDEVS_TXRX_STATS = 38,
+    HTT_DBG_EXT_STATS_VDEVS_TXRX = 38,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_VDEVS_TXRX_STATS =
+            HTT_DBG_EXT_STATS_VDEVS_TXRX,
 
-    HTT_DBG_EXT_VDEV_RTT_INITIATOR_STATS = 39,
+    HTT_DBG_EXT_STATS_VDEV_RTT_INITIATOR = 39,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_VDEV_RTT_INITIATOR_STATS =
+            HTT_DBG_EXT_STATS_VDEV_RTT_INITIATOR,
 
-    /** HTT_DBG_EXT_PDEV_PER_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_PER
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_tx_pdev_per_stats_t
      */
-    HTT_DBG_EXT_PDEV_PER_STATS = 40,
+    HTT_DBG_EXT_STATS_PDEV_PER = 40,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PDEV_PER_STATS =
+            HTT_DBG_EXT_STATS_PDEV_PER,
 
-    HTT_DBG_EXT_AST_ENTRIES = 41,
+    HTT_DBG_EXT_STATS_AST_ENTRIES = 41,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_AST_ENTRIES =
+            HTT_DBG_EXT_STATS_AST_ENTRIES,
 
-    /** HTT_DBG_EXT_RX_RING_STATS
+    /** HTT_DBG_EXT_STATS_RX_RING
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_rx_fw_ring_stats_tlv_v
      */
-    HTT_DBG_EXT_RX_RING_STATS = 42,
+    HTT_DBG_EXT_STATS_RX_RING = 42,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_RX_RING_STATS =
+            HTT_DBG_EXT_STATS_RX_RING,
 
-    /** HTT_STRM_GEN_MPDUS_STATS, HTT_STRM_GEN_MPDUS_DETAILS_STATS
+    /** HTT_DBG_EXT_STATS_STRM_GEN_MPDUS,
+     *  HTT_DBG_EXT_STATS_STRM_GEN_MPDUS_DETAILS
      * PARAMS:
      *   - No params
      * RESP MSG: HTT_T2H STREAMING_STATS_IND (not EXT_STATS_CONF)
@@ -472,25 +506,36 @@ enum htt_dbg_ext_stats_type {
      *   - HTT_STRM_GEN_MPDUS_DETAILS_STATS:
      *     htt_stats_strm_gen_mpdus_details_tlv_t
      */
-    HTT_STRM_GEN_MPDUS_STATS = 43,
-    HTT_STRM_GEN_MPDUS_DETAILS_STATS = 44,
+    HTT_DBG_EXT_STATS_STRM_GEN_MPDUS = 43,
+    HTT_DBG_EXT_STATS_STRM_GEN_MPDUS_DETAILS = 44,
+        /* retain the deprecated names as aliases */
+        HTT_STRM_GEN_MPDUS_STATS =
+            HTT_DBG_EXT_STATS_STRM_GEN_MPDUS,
+        HTT_STRM_GEN_MPDUS_DETAILS_STATS =
+            HTT_DBG_EXT_STATS_STRM_GEN_MPDUS_DETAILS,
 
-    /** HTT_DBG_SOC_ERROR_STATS
+    /** HTT_DBG_EXT_STATS_SOC_ERROR
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_dmac_reset_stats_tlv
      */
-    HTT_DBG_SOC_ERROR_STATS = 45,
+    HTT_DBG_EXT_STATS_SOC_ERROR = 45,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_SOC_ERROR_STATS =
+            HTT_DBG_EXT_STATS_SOC_ERROR,
 
-    /** HTT_DBG_PDEV_PUNCTURE_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_PUNCTURE
      * PARAMS:
      *    - param 0: enum from htt_tx_pdev_puncture_stats_upload_t, indicating
      *      the stats to upload
      * RESP MSG:
      *    - one or more htt_pdev_puncture_stats_tlv, depending on param 0
      */
-    HTT_DBG_PDEV_PUNCTURE_STATS = 46,
+    HTT_DBG_EXT_STATS_PDEV_PUNCTURE = 46,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_PDEV_PUNCTURE_STATS =
+            HTT_DBG_EXT_STATS_PDEV_PUNCTURE,
 
     /** HTT_DBG_EXT_STATS_ML_PEERS_INFO
      * PARAMS:
@@ -504,44 +549,59 @@ enum htt_dbg_ext_stats_type {
      */
     HTT_DBG_EXT_STATS_ML_PEERS_INFO = 47,
 
-    /** HTT_DBG_ODD_MANDATORY_STATS
+    /** HTT_DBG_EXT_STATS_ODD_MANDATORY
      * params:
      *          None
      * Response MSG:
      *          htt_odd_mandatory_pdev_stats_tlv
      */
-    HTT_DBG_ODD_MANDATORY_STATS = 48,
+    HTT_DBG_EXT_STATS_ODD_MANDATORY = 48,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_MANDATORY_STATS =
+            HTT_DBG_EXT_STATS_ODD_MANDATORY,
 
-    /** HTT_DBG_PDEV_SCHED_ALGO_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_SCHED_ALGO
      * PARAMS:
      *      - No Params
      * RESP MSG:
      *   - htt_pdev_sched_algo_ofdma_stats_tlv
      */
-    HTT_DBG_PDEV_SCHED_ALGO_STATS = 49,
+    HTT_DBG_EXT_STATS_PDEV_SCHED_ALGO = 49,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_PDEV_SCHED_ALGO_STATS =
+            HTT_DBG_EXT_STATS_PDEV_SCHED_ALGO,
 
-    /** HTT_DBG_ODD_MANDATORY_MUMIMO_STATS
+    /** HTT_DBG_EXT_STATS_ODD_MANDATORY_MUMIMO
      * params:
      *          None
      * Response MSG:
      *          htt_odd_mandatory_mumimo_pdev_stats_tlv
      */
-    HTT_DBG_ODD_MANDATORY_MUMIMO_STATS = 50,
-    /** HTT_DBG_ODD_MANDATORY_MUOFDMA_STATS
+    HTT_DBG_EXT_STATS_ODD_MANDATORY_MUMIMO = 50,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_MANDATORY_MUMIMO_STATS =
+            HTT_DBG_EXT_STATS_ODD_MANDATORY_MUMIMO,
+    /** HTT_DBG_EXT_STATS_ODD_MANDATORY_MUOFDMA
      * params:
      *          None
      * Response MSG:
      *          htt_odd_mandatory_muofdma_pdev_stats_tlv
      */
-    HTT_DBG_ODD_MANDATORY_MUOFDMA_STATS = 51,
+    HTT_DBG_EXT_STATS_ODD_MANDATORY_MUOFDMA = 51,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_MANDATORY_MUOFDMA_STATS =
+            HTT_DBG_EXT_STATS_ODD_MANDATORY_MUOFDMA,
 
-    /** HTT_DBG_EXT_PHY_PROF_CAL_STATS
+    /** HTT_DBG_EXT_STATS_PHY_PROF_CAL
      * params:
      *          None
      * Response MSG:
      *          htt_stats_latency_prof_cal_data_tlv
      */
-    HTT_DBG_EXT_PHY_PROF_CAL_STATS = 52,
+    HTT_DBG_EXT_STATS_PHY_PROF_CAL = 52,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PHY_PROF_CAL_STATS =
+            HTT_DBG_EXT_STATS_PHY_PROF_CAL,
 
     /** HTT_DBG_EXT_STATS_PDEV_BW_MGR
      * PARAMS:
@@ -551,94 +611,127 @@ enum htt_dbg_ext_stats_type {
      */
     HTT_DBG_EXT_STATS_PDEV_BW_MGR = 53,
 
-    /** HTT_DBG_PDEV_MBSSID_CTRL_FRAME_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_MBSSID_CTRL_FRAME
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_pdev_mbssid_ctrl_frame_stats
      */
-    HTT_DBG_PDEV_MBSSID_CTRL_FRAME_STATS = 54,
+    HTT_DBG_EXT_STATS_PDEV_MBSSID_CTRL_FRAME = 54,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_PDEV_MBSSID_CTRL_FRAME_STATS =
+            HTT_DBG_EXT_STATS_PDEV_MBSSID_CTRL_FRAME,
 
-    /** HTT_DBG_SOC_SSR_STATS
+    /** HTT_DBG_EXT_STATS_SOC_SSR
      * Used for non-MLO UMAC recovery stats.
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_umac_ssr_stats_tlv
      */
-    HTT_DBG_SOC_SSR_STATS = 55,
+    HTT_DBG_EXT_STATS_SOC_SSR = 55,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_SOC_SSR_STATS =
+            HTT_DBG_EXT_STATS_SOC_SSR,
 
-    /** HTT_DBG_MLO_UMAC_SSR_STATS
+    /** HTT_DBG_EXT_STATS_MLO_UMAC_SSR
      * Used for MLO UMAC recovery stats.
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_mlo_umac_ssr_stats_tlv
      */
-    HTT_DBG_MLO_UMAC_SSR_STATS = 56,
+    HTT_DBG_EXT_STATS_MLO_UMAC_SSR = 56,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_MLO_UMAC_SSR_STATS =
+            HTT_DBG_EXT_STATS_MLO_UMAC_SSR,
 
-    /** HTT_DBG_PDEV_TDMA_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_TDMA
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_pdev_tdma_stats_tlv
      */
-    HTT_DBG_PDEV_TDMA_STATS = 57,
+    HTT_DBG_EXT_STATS_PDEV_TDMA = 57,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_PDEV_TDMA_STATS =
+            HTT_DBG_EXT_STATS_PDEV_TDMA,
 
-    /** HTT_DBG_CODEL_STATS
+    /** HTT_DBG_EXT_STATS_CODEL
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_codel_svc_class_stats_tlv
      *    - htt_codel_msduq_stats_tlv
      */
-    HTT_DBG_CODEL_STATS = 58,
+    HTT_DBG_EXT_STATS_CODEL = 58,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_CODEL_STATS =
+            HTT_DBG_EXT_STATS_CODEL,
 
-    /** HTT_DBG_ODD_PDEV_BE_TX_MU_OFDMA_STATS
+    /** HTT_DBG_EXT_STATS_ODD_PDEV_BE_TX_MU_OFDMA
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_tx_pdev_mpdu_stats_tlv
      */
-    HTT_DBG_ODD_PDEV_BE_TX_MU_OFDMA_STATS = 59,
+    HTT_DBG_EXT_STATS_ODD_PDEV_BE_TX_MU_OFDMA = 59,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_PDEV_BE_TX_MU_OFDMA_STATS =
+            HTT_DBG_EXT_STATS_ODD_PDEV_BE_TX_MU_OFDMA,
 
-    /** HTT_DBG_EXT_STATS_PDEV_UL_TRIGGER
+    /** HTT_DBG_EXT_STATS_ODD_UL_BE_OFDMA
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_rx_pdev_be_ul_ofdma_user_stats_tlv
      */
-    HTT_DBG_ODD_UL_BE_OFDMA_STATS = 60,
+    HTT_DBG_EXT_STATS_ODD_UL_BE_OFDMA = 60,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_UL_BE_OFDMA_STATS =
+            HTT_DBG_EXT_STATS_ODD_UL_BE_OFDMA,
 
-    /** HTT_DBG_ODD_BE_TXBF_OFDMA_STATS
+    /** HTT_DBG_EXT_STATS_ODD_BE_TXBF_OFDMA
      */
-    HTT_DBG_ODD_BE_TXBF_OFDMA_STATS = 61,
+    HTT_DBG_EXT_STATS_ODD_BE_TXBF_OFDMA = 61,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_BE_TXBF_OFDMA_STATS =
+            HTT_DBG_EXT_STATS_ODD_BE_TXBF_OFDMA,
 
-    /** HTT_DBG_ODD_STATS_PDEV_BE_UL_MUMIMO_TRIG_STATS
+    /** HTT_DBG_EXT_STATS_ODD_STATS_PDEV_BE_UL_MUMIMO_TRIG
      * PARAMS:
      *   - No Params
      * RESP MSG:
      *   - htt_rx_pdev_be_ul_ofdma_user_stats_tlv
      */
-    HTT_DBG_ODD_STATS_PDEV_BE_UL_MUMIMO_TRIG_STATS = 62,
+    HTT_DBG_EXT_STATS_ODD_STATS_PDEV_BE_UL_MUMIMO_TRIG = 62,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_ODD_STATS_PDEV_BE_UL_MUMIMO_TRIG_STATS =
+            HTT_DBG_EXT_STATS_ODD_STATS_PDEV_BE_UL_MUMIMO_TRIG,
 
-    /** HTT_DBG_MLO_SCHED_STATS
+    /** HTT_DBG_EXT_STATS_MLO_SCHED
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_pdev_mlo_sched_stats_tlv
      */
-    HTT_DBG_MLO_SCHED_STATS = 63,
+    HTT_DBG_EXT_STATS_MLO_SCHED = 63,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_MLO_SCHED_STATS =
+            HTT_DBG_EXT_STATS_MLO_SCHED,
 
-    /** HTT_DBG_PDEV_MLO_IPC_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_MLO_IPC
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_pdev_mlo_ipc_stats_tlv
      */
-    HTT_DBG_PDEV_MLO_IPC_STATS = 64,
+    HTT_DBG_EXT_STATS_PDEV_MLO_IPC = 64,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_PDEV_MLO_IPC_STATS =
+            HTT_DBG_EXT_STATS_PDEV_MLO_IPC,
 
-    /** HTT_DBG_EXT_PDEV_RTT_RESP_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_RTT_RESP
      * PARAMS:
      *    - No Params
      * RESP MSG:
@@ -647,16 +740,22 @@ enum htt_dbg_ext_stats_type {
      *    -  htt_stats_pdev_rtt_tbr_selfgen_queued_stats_tlv
      *    -  htt_stats_pdev_rtt_tbr_cmd_result_stats_tlv
      */
-    HTT_DBG_EXT_PDEV_RTT_RESP_STATS = 65,
+    HTT_DBG_EXT_STATS_PDEV_RTT_RESP = 65,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PDEV_RTT_RESP_STATS =
+            HTT_DBG_EXT_STATS_PDEV_RTT_RESP,
 
-    /** HTT_DBG_EXT_PDEV_RTT_INITIATOR_STATS
+    /** HTT_DBG_EXT_STATS_PDEV_RTT_INITIATOR
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    -  htt_stats_pdev_rtt_init_stats_tlv
      *    -  htt_stats_pdev_rtt_hw_stats_tlv
      */
-    HTT_DBG_EXT_PDEV_RTT_INITIATOR_STATS = 66,
+    HTT_DBG_EXT_STATS_PDEV_RTT_INITIATOR = 66,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_EXT_PDEV_RTT_INITIATOR_STATS =
+            HTT_DBG_EXT_STATS_PDEV_RTT_INITIATOR,
 
     /** HTT_DBG_EXT_STATS_LATENCY_PROF_STATS_LO
      *  PARAMS:
@@ -668,13 +767,16 @@ enum htt_dbg_ext_stats_type {
      */
     HTT_DBG_EXT_STATS_LATENCY_PROF_STATS_LO = 67,
 
-    /** HTT_DBG_GTX_STATS
+    /** HTT_DBG_EXT_STATS_GTX
      * PARAMS:
      *    - No Params
      * RESP MSG:
      *    - htt_pdev_gtx_stats_tlv
      */
-    HTT_DBG_GTX_STATS = 68,
+    HTT_DBG_EXT_STATS_GTX = 68,
+        /* retain the deprecated name as an alias */
+        HTT_DBG_GTX_STATS =
+            HTT_DBG_EXT_STATS_GTX,
 
     /** HTT_DBG_EXT_STATS_TX_VDEV_NSS
      * PARAMS:
@@ -683,6 +785,30 @@ enum htt_dbg_ext_stats_type {
      *    - htt_stats_tx_vdev_nss_tlv
      */
     HTT_DBG_EXT_STATS_TX_VDEV_NSS = 69,
+
+    /** HTT_DBG_EXT_STATS_PDEV_RTT_DELAY
+     * PARAMS:
+     *    - No Params
+     * RESP MSG:
+     *    - htt_stats_pdev_rtt_delay_tlv
+     */
+    HTT_DBG_EXT_STATS_PDEV_RTT_DELAY = 70,
+
+    /** HTT_DBG_EXT_STATS_PDEV_SPECTRAL
+     * PARAMS:
+     *    - No Params
+     * RESP MSG:
+     *    - htt_stats_pdev_spectral_tlv
+     */
+    HTT_DBG_EXT_STATS_PDEV_SPECTRAL = 71,
+
+    /** HTT_DBG_EXT_STATS_PDEV_AOA
+     * PARAMS:
+     *    - No Params
+     * RESP MSG:
+     *    - htt_stats_pdev_aoa_tlv
+     */
+    HTT_DBG_EXT_STATS_PDEV_AOA = 72,
 
 
     /* keep this last */
@@ -8785,6 +8911,121 @@ typedef struct {
 /* preserve old name alias for new name consistent with the tag name */
 typedef htt_stats_pktlog_and_htt_ring_stats_tlv
     htt_pktlog_and_htt_ring_stats_tlv;
+
+/* STATS_TYPE: HTT_DBG_EXT_STATS_PDEV_SPECTRAL
+ * TLV_TAGS:
+ *  HTT_STATS_PDEV_SPECTRAL_TAG
+ */
+#define HTT_STATS_PDEV_SPECTRAL_PCFG_MAX_DET (3)
+#define HTT_STATS_PDEV_SPECTRAL_MAX_PCSS_RING_FOR_IPC (3)
+
+typedef struct {
+    htt_tlv_hdr_t tlv_hdr;
+
+    A_UINT32 dbg_num_buf;
+    A_UINT32 dbg_num_events;
+
+    /* HOST_ring_HI */
+    A_UINT32 host_head_idx;
+    A_UINT32 host_tail_idx;
+    A_UINT32 host_shadow_tail_idx;
+
+    /* SHADOW_ring_HI */
+    A_UINT32 in_ring_head_idx;
+    A_UINT32 in_ring_tail_idx;
+    A_UINT32 in_ring_shadow_tail_idx;
+    A_UINT32 in_ring_shadow_head_idx;
+
+    /* OUT_ring_HI */
+    A_UINT32 out_ring_head_idx;
+    A_UINT32 out_ring_tail_idx;
+    A_UINT32 out_ring_shadow_tail_idx;
+    A_UINT32 out_ring_shadow_head_idx;
+
+    /* IPC_ring MAX_PCSS_RING_FOR_IPC */
+    struct {
+        A_UINT32 head_idx;
+        A_UINT32 tail_idx;
+        A_UINT32 shadow_tail_idx;
+        A_UINT32 shadow_head_idx;
+    } ipc_rings[HTT_STATS_PDEV_SPECTRAL_MAX_PCSS_RING_FOR_IPC];
+
+    /* VREG Counters */
+    struct {
+        A_UINT32 scan_priority;
+        A_UINT32 scan_count;
+        A_UINT32 scan_period;
+        A_UINT32 scan_chn_mask;
+        A_UINT32 scan_ena;
+        A_UINT32 scan_update_mask;
+        A_UINT32 scan_ready_intrpt;
+        A_UINT32 scans_performed;
+        A_UINT32 intrpts_sent;
+        A_UINT32 scan_pending_count;
+        A_UINT32 num_pcss_elem_zero;
+        A_UINT32 num_in_elem_zero;
+        A_UINT32 num_out_elem_zero;
+        A_UINT32 num_elem_moved;
+    } pcfg_stats_det[HTT_STATS_PDEV_SPECTRAL_PCFG_MAX_DET];
+
+    struct {
+        A_UINT32 scan_no_ipc_buf_avail;
+        A_UINT32 agile_scan_no_ipc_buf_avail;
+        A_UINT32 scan_FFT_discard_count;
+        A_UINT32 scan_recapture_FFT_discard_count;
+        A_UINT32 scan_recapture_count;
+    } pcfg_stats_vreg;
+} htt_stats_pdev_spectral_tlv;
+
+/* STATS_TYPE: HTT_DBG_EXT_STATS_PDEV_RTT_DELAY
+ * TLV_TAGS:
+ *  HTT_STATS_PDEV_RTT_DELAY_TAG
+ */
+#define HTT_STATS_PDEV_RTT_DELAY_NUM_INSTANCES (2)
+/* HTT_STATS_PDEV_RTT_DELAY_PKT_BW:
+ *   0 ->  20 MHz
+ *   1 ->  40 MHz
+ *   2 ->  80 MHz
+ *   3 -> 160 MHz
+ *   4 -> 320 MHz
+ *   5: reserved
+ */
+#define HTT_STATS_PDEV_RTT_DELAY_PKT_BW (6)
+typedef struct {
+    htt_tlv_hdr_t tlv_hdr;
+
+    struct {
+        /* base_delay: picosecond units */
+        A_UINT32 base_delay[HTT_STATS_PDEV_RTT_DELAY_PKT_BW];
+        /* final_delay: picosecond units */
+        A_UINT32 final_delay[HTT_STATS_PDEV_RTT_DELAY_PKT_BW];
+        A_UINT32 per_chan_bias;
+        A_UINT32 off_chan_bias;
+        A_UINT32 chan_bw_bias;
+        A_UINT32 digital_block_status;
+        A_UINT32 chan_freq; /* MHz units */
+        A_UINT32 bandwidth; /* MHz units */
+    } rtt_delay[HTT_STATS_PDEV_RTT_DELAY_NUM_INSTANCES];
+} htt_stats_pdev_rtt_delay_tlv;
+
+/* STATS_TYPE: HTT_DBG_EXT_STATS_PDEV_AOA
+ * TLV_TAGS:
+ *  HTT_STATS_PDEV_AOA_TAG
+ */
+#define HTT_STATS_PDEV_AOA_MAX_HISTOGRAM (10)
+typedef struct {
+    htt_tlv_hdr_t tlv_hdr;
+
+    A_UINT32 gain_idx[HTT_STATS_PDEV_AOA_MAX_HISTOGRAM];
+    /* gain table element values:
+     *   0 -> default gain
+     *   1 -> low gain
+     *   2 -> very low gain
+     */
+    A_UINT32 gain_table[HTT_STATS_PDEV_AOA_MAX_HISTOGRAM];
+    A_UINT32 phase_calculated[HTT_STATS_PDEV_AOA_MAX_HISTOGRAM];
+    A_UINT32 phase_in_degree[HTT_STATS_PDEV_AOA_MAX_HISTOGRAM];
+} htt_stats_pdev_aoa_tlv;
 
 #define HTT_DLPAGER_STATS_MAX_HIST            10
 #define HTT_DLPAGER_ASYNC_LOCKED_PAGE_COUNT_M 0x000000FF
