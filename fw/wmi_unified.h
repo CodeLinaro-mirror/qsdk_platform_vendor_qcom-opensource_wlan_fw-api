@@ -17468,6 +17468,9 @@ typedef enum {
  */
 #define WMI_UNIFIED_VDEV_START_MLO_REPURPOSE_VAP (1<<5)
 
+/** Indicates traffic transmitting allowed even though no station connecting to AP */
+#define WMI_UNIFIED_VDEV_START_CONNECTIONLESS_ALLOWED (1<<6)
+
 /* BSS color 0-6 */
 #define WMI_HEOPS_COLOR_GET_D2(he_ops) WMI_GET_BITS(he_ops, 0, 6)
 #define WMI_HEOPS_COLOR_SET_D2(he_ops, value) WMI_SET_BITS(he_ops, 0, 6, value)
