@@ -19493,6 +19493,8 @@ typedef enum {
      */
     WMI_VDEV_PARAM_HE_ULOFDMA_DCM,                       /* 0xCB */
 
+    WMI_VDEV_PARAM_PURE_11BE_MODE,                       /* 0xCC */
+
     /*=== ADD NEW VDEV PARAM TYPES ABOVE THIS LINE ===
      * The below vdev param types are used for prototyping, and are
      * prone to change.
