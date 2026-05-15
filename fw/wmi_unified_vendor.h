@@ -23,16 +23,24 @@
 #ifndef _WMI_UNIFIED_VENDOR_H_
 #define _WMI_UNIFIED_VENDOR_H_
 
+typedef struct
+{
+    A_UINT16 channel_bw;
+    A_UINT16 channel_num;
+} wmi_pdev_vendor_csa_param;
+
 typedef union
 {
     A_UINT32 pdev_sample1_cmd;
     A_UINT32 pdev_sample2_cmd;
+    wmi_pdev_vendor_csa_param pdev_vendor_csa_param;
 } wmi_pdev_vendor_cmd_val;
 
 typedef union
 {
     A_UINT32 pdev_sample1_event;
     A_UINT32 pdev_sample2_event;
+    wmi_pdev_vendor_csa_param pdev_vendor_csa_param;
 } wmi_pdev_vendor_event_val;
 
 typedef union
