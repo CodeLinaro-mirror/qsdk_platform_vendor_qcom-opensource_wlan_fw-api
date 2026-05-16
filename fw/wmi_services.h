@@ -704,6 +704,7 @@ typedef  enum  {
     WMI_SERVICE_PEER_UL_RTD_ESTIMATE = 445, /* Indicates UL RTD window start config supported by FW */
     WMI_SERVICE_DCM_ULOFDMA_SUPPORT = 446, /* Support for DCM for ULOFDMA Transmission */
     WMI_SERVICE_VDEV_PURE11BE_SUPPORT = 447, /* Indicates Pure11ax mode supported by FW */
+    WMI_SERVICE_PRIVATE_CSA_SUPPORT = 448, /* Support for private CSA */
 
 
     WMI_MAX_EXT2_SERVICE
