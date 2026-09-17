@@ -25,7 +25,8 @@
 
 typedef struct
 {
-    A_UINT16 channel_bw;
+    A_UINT8 channel_bw;
+    A_UINT8 channel_band;
     A_UINT16 channel_num;
 } wmi_pdev_vendor_csa_param;
 
